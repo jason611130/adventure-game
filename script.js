@@ -7,11 +7,16 @@ const recipientName = document.querySelector('#recipientName');
 const formMessage = document.querySelector('#formMessage');
 const successCard = document.querySelector('#successCard');
 const finishBtn = document.querySelector('#finishBtn');
+const arrivalDialog = document.querySelector('#arrivalDialog');
+const confirmMessage = document.querySelector('#confirmMessage');
+const confirmArrivalBtn = document.querySelector('#confirmArrivalBtn');
+const cancelArrivalBtn = document.querySelector('#cancelArrivalBtn');
 const arrivalConfirmations = [
   '你確定你到了嗎',
   '我覺得你在騙我',
   '你真的到了嗎',
 ];
+let arrivalConfirmationIndex = 0;
 
 function showScene(id, step) {
   scenes.forEach((scene) => {
@@ -28,12 +33,38 @@ function showScene(id, step) {
 
 document.querySelector('[data-next="step2"]').addEventListener('click', () => showScene('step2', 2));
 
-arrivedBtn.addEventListener('click', () => {
-  const confirmedEveryTime = arrivalConfirmations.every((message) => window.confirm(message));
+function showArrivalConfirmation() {
+  confirmMessage.textContent = arrivalConfirmations[arrivalConfirmationIndex];
+  arrivalDialog.hidden = false;
+  document.body.classList.add('dialog-open');
+  confirmArrivalBtn.focus();
+}
 
-  if (confirmedEveryTime) {
+function closeArrivalConfirmation() {
+  arrivalDialog.hidden = true;
+  document.body.classList.remove('dialog-open');
+}
+
+arrivedBtn.addEventListener('click', () => {
+  arrivalConfirmationIndex = 0;
+  showArrivalConfirmation();
+});
+
+confirmArrivalBtn.addEventListener('click', () => {
+  arrivalConfirmationIndex += 1;
+
+  if (arrivalConfirmationIndex === arrivalConfirmations.length) {
+    closeArrivalConfirmation();
     showScene('step3', 3);
+    return;
   }
+
+  showArrivalConfirmation();
+});
+
+cancelArrivalBtn.addEventListener('click', () => {
+  closeArrivalConfirmation();
+  arrivedBtn.focus();
 });
 
 function validateRecipient(showError = false) {
