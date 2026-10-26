@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#16130a">
+  <meta name="description" content="一場前往 7-ELEVEN 新秀門市的專屬探險。">
+  <title>神秘取件任務｜探險遊戲</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="回到冒險起點">
+        <span class="brand-mark" aria-hidden="true">⚡</span>
+        <span>PIKA<span class="brand-dot">.</span>QUEST</span>
+      </a>
+      <div class="progress-wrap" aria-label="任務進度">
+        <span class="progress-label">任務進度</span>
+        <div class="progress-track"><span id="progressBar"></span></div>
+        <span id="progressText" class="progress-count">01 / 03</span>
+      </div>
+    </header>
+
+    <section id="step1" class="scene is-active" aria-labelledby="title1">
+      <div class="scene-copy">
+        <p class="eyebrow">A LITTLE CHALLENGE</p>
+        <h1 id="title1">該休息一下了<br><em>這邊有一項挑戰</em></h1>
+        <aside class="notice" role="note">
+          <span class="notice-icon" aria-hidden="true">!</span>
+          <span><strong>出發前提醒</strong>記得攜帶身分證</span>
+        </aside>
+        <button class="primary-btn" type="button" data-next="step2">
+          <span>接受挑戰</span><span aria-hidden="true">→</span>
+        </button>
+      </div>
+      <div class="scene-art pika-hero" aria-hidden="true">
+        <img class="pika-pixel" src="pikachu-pixel.webp" alt="正在奔跑的像素皮卡丘">
+        <span class="run-line run-line-one"></span><span class="run-line run-line-two"></span>
+      </div>
+    </section>
+
+    <section id="step2" class="scene" aria-labelledby="title2" hidden>
+      <div class="scene-copy">
+        <p class="eyebrow">CHECKPOINT 01</p>
+        <h1 id="title2">前往<br><em>7-11 新秀門市</em></h1>
+        <p class="lead">跟著閃電足跡前進。抵達門市後，按下按鈕完成定位。</p>
+        <div class="location-card">
+          <div class="pin" aria-hidden="true"><span></span></div>
+          <div><small>目的地</small><strong>7-ELEVEN 新秀門市</strong></div>
+          <span class="location-status">待抵達</span>
+        </div>
+        <button id="arrivedBtn" class="primary-btn" type="button">
+          <span>我已經到達指定地點</span><span aria-hidden="true">✓</span>
+        </button>
+      </div>
+      <div class="scene-art route" aria-hidden="true">
+        <span class="route-start">PIKA START</span>
+        <svg viewBox="0 0 440 440" role="presentation">
+          <path class="route-shadow" d="M70 350C100 265 190 330 207 229S330 219 359 94"/>
+          <path class="route-path" d="M70 350C100 265 190 330 207 229S330 219 359 94"/>
+        </svg>
+        <span class="route-dot dot-one"></span><span class="route-dot dot-two"></span>
+        <div class="store-marker"><span>7</span><small>ELEVEN</small><i>⚡</i></div>
+        <img class="mini-pika route-pika" src="pikachu-pixel.webp" alt="">
+      </div>
+    </section>
+
+    <section id="step3" class="scene" aria-labelledby="title3" hidden>
+      <div class="scene-copy verify-copy">
+        <p class="eyebrow">PIKA IDENTITY CHECK</p>
+        <h1 id="title3">最後一道<br><em>身分驗證</em></h1>
+        <p class="lead">請輸入收件人姓名，解鎖最後的取件線索。</p>
+        <form id="nameForm" novalidate>
+          <label for="recipientName">收件人姓名</label>
+          <div class="input-row">
+            <input id="recipientName" name="recipientName" type="text" autocomplete="name" placeholder="請輸入您的名字" aria-describedby="formMessage" required>
+            <button class="primary-btn compact" type="submit" aria-label="確認姓名">→</button>
+          </div>
+          <p id="formMessage" class="form-message" aria-live="polite"></p>
+        </form>
+        <div id="successCard" class="success-card" hidden>
+          <span class="success-check" aria-hidden="true">✓</span>
+          <div><small>輸入正確 · 取件電話號碼</small><a href="tel:0972746075">0972 746 075</a></div>
+        </div>
+        <button id="finishBtn" class="primary-btn finish-btn" type="button" hidden>
+          <span>我已領取寶藏</span><span aria-hidden="true">✦</span>
+        </button>
+      </div>
+      <div class="scene-art lock-art" aria-hidden="true">
+        <span class="scan-line"></span>
+        <div class="id-card-art">
+          <div class="id-card-head"><span>IDENTITY CARD</span><b>⚡</b></div>
+          <div class="id-card-body">
+            <div class="id-photo"><span></span></div>
+            <div class="id-lines">
+              <i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <div class="id-card-code">ID · VERIFIED · 03</div>
+        </div>
+        <span class="code code-a">09 · 72</span><span class="code code-b">ACCESS</span>
+        <img class="mini-pika lock-pika" src="pikachu-pixel.webp" alt="">
+      </div>
+    </section>
+
+    <section id="finale" class="scene finale" aria-labelledby="finalTitle" hidden>
+      <div class="confetti" aria-hidden="true"></div>
+      <img class="mini-pika final-pika" src="pikachu-pixel.webp" alt="">
+      <div class="final-content">
+        <h1 id="finalTitle">祝妳期中、期末<br><em>ALL PASS!</em></h1>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
