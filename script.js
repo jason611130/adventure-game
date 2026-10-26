@@ -7,6 +7,11 @@ const recipientName = document.querySelector('#recipientName');
 const formMessage = document.querySelector('#formMessage');
 const successCard = document.querySelector('#successCard');
 const finishBtn = document.querySelector('#finishBtn');
+const arrivalConfirmations = [
+  '你確定你到了嗎',
+  '我覺得你在騙我',
+  '你真的到了嗎',
+];
 
 function showScene(id, step) {
   scenes.forEach((scene) => {
@@ -23,7 +28,13 @@ function showScene(id, step) {
 
 document.querySelector('[data-next="step2"]').addEventListener('click', () => showScene('step2', 2));
 
-arrivedBtn.addEventListener('click', () => showScene('step3', 3));
+arrivedBtn.addEventListener('click', () => {
+  const confirmedEveryTime = arrivalConfirmations.every((message) => window.confirm(message));
+
+  if (confirmedEveryTime) {
+    showScene('step3', 3);
+  }
+});
 
 function validateRecipient(showError = false) {
   const answer = recipientName.value.normalize('NFC').replace(/\s+/g, '');
